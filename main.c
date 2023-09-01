@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/01 18:21:13 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:29:35 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	main(void)
 	my_list = ft_lstappend(my_list, &d);
 
 	t_list *tmp = my_list;
-	t_list *tmp2 = my_list;
 
 	while (tmp != NULL)
 	{
@@ -105,11 +104,6 @@ int	main(void)
 	}
 	return (0);
 }
-
-
-
-
-
 
 
 
