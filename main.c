@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/01 18:29:35 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:16:52 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,49 @@ int	ft_list_size(t_list *array)
 		tmp = tmp->next;
 	}
 	return (size);
+}
+
+int	ft_nb_min(t_list *array)
+{
+	t_list *tmp;
+	int	min;
+
+	tmp = array;
+	min = *tmp->value;
+	while (tmp != NULL)
+	{
+		if (*tmp->value < min)
+			min = *tmp->value;
+		tmp = tmp->next;
+	}
+	return (min);
+}
+
+void	ft_pop_last(t_list **array)
+{
+	t_list *tmp;
+	t_list *last;
+
+	tmp = *array;
+	last = NULL;
+	while (tmp->next != NULL)
+	{
+		last = tmp;
+		tmp = tmp->next;
+	}
+	last->next = NULL;
+}
+
+void	ft_rra_rotate(t_list **array)
+{
+	t_list *tmp;
+
+	tmp = *array;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	ft_pop_last(array);
+	tmp->next = *array;
+	*array = tmp;
 }
 
 void	ft_ra_rotate(t_list **array)
@@ -75,6 +118,7 @@ int	main(void)
 	t_list *my_list;
 
 	int	size = 0;
+	int	min;
 	my_list = NULL;
 
 	int a = 2;
@@ -96,6 +140,9 @@ int	main(void)
 	printf("**************************\n");
 
 	ft_ra_rotate(&my_list);
+	// ft_rra_rotate(&my_list);
+	// min = ft_nb_min(my_list);
+	// printf("Nb-Min: %d\n", min);
 
 	while (my_list != NULL)
 	{
@@ -104,9 +151,6 @@ int	main(void)
 	}
 	return (0);
 }
-
-
-
 
 
 /*
@@ -125,3 +169,4 @@ ra : Le premier élément devient le dernier
 rra: Le dernier élément devient le premier.
 
 */
+
