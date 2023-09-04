@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/04 17:15:47 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:33:42 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,11 @@ int	ft_nb_min(t_list *array)
 
 void	ft_sa_swap(t_list **array)
 {
-	t_list	*tmp;
-	t_list	*first;
-	t_list	*second;
+	int	*tmp;
 
-	first = (*array)->next;
-	tmp = (*array)->next->next;
-	second = *array;
-	first->next = second;
-	second->next = tmp;
-	*array = first;
+	tmp = (*array)->next->value;
+	(*array)->next->value = (*array)->value;
+	(*array)->value = tmp;
 }
 
 void	ft_pop_last(t_list **array)
@@ -135,8 +130,8 @@ int	main(void)
 	int	min;
 	my_list = NULL;
 
-	int a = 2;
-	int b = 3;
+	int a = 3;
+	int b = 2;
 	int c = 7;
 	int d = 0;
 	my_list = ft_lstappend(my_list, &a);
