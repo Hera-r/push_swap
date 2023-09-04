@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/03 21:16:52 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:15:47 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ int	ft_nb_min(t_list *array)
 		tmp = tmp->next;
 	}
 	return (min);
+}
+
+void	ft_sa_swap(t_list **array)
+{
+	t_list	*tmp;
+	t_list	*first;
+	t_list	*second;
+
+	first = (*array)->next;
+	tmp = (*array)->next->next;
+	second = *array;
+	first->next = second;
+	second->next = tmp;
+	*array = first;
 }
 
 void	ft_pop_last(t_list **array)
@@ -139,7 +153,8 @@ int	main(void)
 	}
 	printf("**************************\n");
 
-	ft_ra_rotate(&my_list);
+	// ft_ra_rotate(&my_list);
+	ft_sa_swap(&my_list);
 	// ft_rra_rotate(&my_list);
 	// min = ft_nb_min(my_list);
 	// printf("Nb-Min: %d\n", min);
