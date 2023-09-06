@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/04 17:33:42 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:43:00 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,33 @@ int	ft_nb_min(t_list *array)
 		tmp = tmp->next;
 	}
 	return (min);
+}
+
+// {8, 2, 11, 1, 7}    9, 5, 3, 6, 10};
+void	ft_pb_push(t_list **array, t_list **list_b)
+{
+	t_list	*tmp_a;
+	t_list	*tmp_b;
+	t_list	*tmp_c;
+
+	tmp_a = (*array)->next;
+	tmp_b = *list_b;
+	if (*list_b == NULL)
+	{
+		tmp_b = *array;
+		tmp_b->next = NULL;
+		*list_b = tmp_b;
+		*array = tmp_a;
+		// printf("pb\n");
+	}
+	else
+	{
+		tmp_c = *array;
+		tmp_c->next = tmp_b;
+		*list_b = tmp_c;
+		*array = tmp_a;
+		// printf("pb\n");
+	}
 }
 
 void	ft_sa_swap(t_list **array)
@@ -105,7 +132,7 @@ t_list	*ft_lstappend(t_list *array, int *value)
 	t_list	*element;
 	t_list	*tmp;
 
-	tmp = array;
+	tmp = array;	
 	element = malloc(sizeof(*element));
 	if (element == NULL)
 		return (NULL);
@@ -122,38 +149,75 @@ t_list	*ft_lstappend(t_list *array, int *value)
 	return (array);
 }
 
+
+#include <time.h>
 int	main(void)
 {
 	t_list *my_list;
+	t_list *list_b;
 
+	srand(time(NULL));
 	int	size = 0;
 	int	min;
 	my_list = NULL;
+	list_b = NULL;
 
-	int a = 3;
-	int b = 2;
-	int c = 7;
-	int d = 0;
-	my_list = ft_lstappend(my_list, &a);
-	my_list = ft_lstappend(my_list, &b);
-	my_list = ft_lstappend(my_list, &c);
-	my_list = ft_lstappend(my_list, &d);
+	// int a = 3;
+	// int b = 2;
+	// int c = 7;
+	// int d = 0;
+	// // int d = 9;
+
+	// my_list = ft_lstappend(my_list, &a);
+	// my_list = ft_lstappend(my_list, &b);
+	// my_list = ft_lstappend(my_list, &c);
+	// my_list = ft_lstappend(my_list, &d);
+
+	int randomNumber[] = {8, 2, 11, 1, 7, 9, 5, 3, 6, 10};
+	int taille = sizeof(randomNumber) / sizeof(randomNumber[0]);
+    for (int i = 0; i < taille; i++) {
+        my_list = ft_lstappend(my_list, &randomNumber[i]);
+    }
+	// t_list *tmp = my_list;
+
+	// while (tmp != NULL)
+	// {
+	// 	printf("%d\n", *tmp->value);
+	// 	tmp = tmp->next;
+	// }
+	// printf("**************************\n");
+	// ft_ra_rotate(&my_list);
+	// ft_sa_swap(&my_list);
+	// ft_pb_push(&my_list, &list_b);
+	// ft_pb_push(&my_list, &list_b);
+	// ft_pb_push(&my_list, &list_b);
+	// ft_pb_push(&my_list, &list_b);
+	// ft_pb_push(&my_list, &list_b);
+
+
+    for (int i = 0; i < taille/2; i++) {
+        ft_pb_push(&my_list, &list_b);
+    }
 
 	t_list *tmp = my_list;
 
 	while (tmp != NULL)
 	{
-		printf("%d\n", *tmp->value);
+		printf("----=> %d\n", *tmp->value);
 		tmp = tmp->next;
 	}
 	printf("**************************\n");
-
-	// ft_ra_rotate(&my_list);
-	ft_sa_swap(&my_list);
 	// ft_rra_rotate(&my_list);
 	// min = ft_nb_min(my_list);
 	// printf("Nb-Min: %d\n", min);
 
+
+	while (list_b != NULL)
+	{
+		printf("+++++=> %d\n", *list_b->value);
+		list_b = list_b->next;
+	}
+	return (0);
 	while (my_list != NULL)
 	{
 		printf("----=> %d\n", *my_list->value);
@@ -161,7 +225,6 @@ int	main(void)
 	}
 	return (0);
 }
-
 
 /*
 
@@ -177,6 +240,17 @@ dia aveo mamerina process jusqu'à ce que le (n) de la pile A == 1
 
 ra : Le premier élément devient le dernier
 rra: Le dernier élément devient le premier.
-
 */
 
+
+/*
+- Manao fonction iray mizara roa an'ilay liste ohatra hoe ft_list_divide
+
+- Manao fonction izay anaovana trie (listra A, listra B)
+	- manao fonction mijery hoe efa trier ve sa tsia ny liste roa
+		- mijery hoe raha faha-roa ve ilay nombre min
+			*raha izay dia manao "sa" na "sb"
+			* dia aveo sady manao pb
+		- manao fonction mijery hoe inférieur sa supérieur
+
+*/
