@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/08 23:47:49 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/09 00:53:29 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,12 @@ int	ft_nb_min(t_list *array)
 int	ft_is_sorting(t_list *array)
 {
 	t_list	*tmp;
-	t_list	*first;
 
 	tmp = array;
-	first = array->next;
-	// faire une variable au lieu de deux pour tmp
-	while (first != NULL)
+	while (tmp->next != NULL)
 	{
-		if (*tmp->value > *first->value)
+		if (*tmp->value > *tmp->next->value)
 			return (1);
-		first = first->next;
 		tmp = tmp->next;
 	}
 	return (0);
@@ -191,13 +187,12 @@ int	main(void)
 	// my_list = ft_lstappend(my_list, &d);
 
 	// {1,2, 3, 4, 5, 6, 7, 8}
-	int randomNumber[] = {1,2, 3, 4, 5, 6, 7, 8}; //{8, 2, 11, 1, 7, 9, 5, 3, 6, 10};
+	int randomNumber[] = {8, 2, 11, 1, 7, 9, 5, 3, 6, 10};
 	int taille = sizeof(randomNumber) / sizeof(randomNumber[0]);
     for (int i = 0; i < taille; i++) {
         my_list = ft_lstappend(my_list, &randomNumber[i]);
     }
 
-	ft_is_sorting(my_list);
 
 	// t_list *tmp = my_list;
 
