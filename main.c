@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/06 19:43:00 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/08 23:47:49 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,24 @@ int	ft_nb_min(t_list *array)
 	return (min);
 }
 
-// {8, 2, 11, 1, 7}    9, 5, 3, 6, 10};
+int	ft_is_sorting(t_list *array)
+{
+	t_list	*tmp;
+	t_list	*first;
+
+	tmp = array;
+	first = array->next;
+	// faire une variable au lieu de deux pour tmp
+	while (first != NULL)
+	{
+		if (*tmp->value > *first->value)
+			return (1);
+		first = first->next;
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 void	ft_pb_push(t_list **array, t_list **list_b)
 {
 	t_list	*tmp_a;
@@ -173,11 +190,15 @@ int	main(void)
 	// my_list = ft_lstappend(my_list, &c);
 	// my_list = ft_lstappend(my_list, &d);
 
-	int randomNumber[] = {8, 2, 11, 1, 7, 9, 5, 3, 6, 10};
+	// {1,2, 3, 4, 5, 6, 7, 8}
+	int randomNumber[] = {1,2, 3, 4, 5, 6, 7, 8}; //{8, 2, 11, 1, 7, 9, 5, 3, 6, 10};
 	int taille = sizeof(randomNumber) / sizeof(randomNumber[0]);
     for (int i = 0; i < taille; i++) {
         my_list = ft_lstappend(my_list, &randomNumber[i]);
     }
+
+	ft_is_sorting(my_list);
+
 	// t_list *tmp = my_list;
 
 	// while (tmp != NULL)
@@ -195,34 +216,33 @@ int	main(void)
 	// ft_pb_push(&my_list, &list_b);
 
 
-    for (int i = 0; i < taille/2; i++) {
-        ft_pb_push(&my_list, &list_b);
-    }
+    // for (int i = 0; i < taille/2; i++) {
+    //     ft_pb_push(&my_list, &list_b);
+    // }
 
-	t_list *tmp = my_list;
+	// t_list *tmp = my_list;
 
-	while (tmp != NULL)
-	{
-		printf("----=> %d\n", *tmp->value);
-		tmp = tmp->next;
-	}
-	printf("**************************\n");
+	// while (tmp != NULL)
+	// {
+	// 	printf("----=> %d\n", *tmp->value);
+	// 	tmp = tmp->next;
+	// }
+	// printf("**************************\n");
 	// ft_rra_rotate(&my_list);
 	// min = ft_nb_min(my_list);
 	// printf("Nb-Min: %d\n", min);
 
-
-	while (list_b != NULL)
-	{
-		printf("+++++=> %d\n", *list_b->value);
-		list_b = list_b->next;
-	}
-	return (0);
-	while (my_list != NULL)
-	{
-		printf("----=> %d\n", *my_list->value);
-		my_list = my_list->next;
-	}
+	// while (list_b != NULL)
+	// {
+	// 	printf("+++++=> %d\n", *list_b->value);
+	// 	list_b = list_b->next;
+	// }
+	// return (0);
+	// while (my_list != NULL)
+	// {
+	// 	printf("----=> %d\n", *my_list->value);
+	// 	my_list = my_list->next;
+	// }
 	return (0);
 }
 
