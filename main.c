@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/21 23:01:07 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:23:49 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,22 @@ int	ft_nb_min(t_list *array)
 		tmp = tmp->next;
 	}
 	return (min);
+}
+
+int	ft_nb_max(t_list *array)
+{
+	t_list *tmp;
+	int	max;
+
+	tmp = array;
+	max = *tmp->value;
+	while (tmp != NULL)
+	{
+		if (*tmp->value > max)
+			max = *tmp->value;
+		tmp = tmp->next;
+	}
+	return (max);
 }
 
 int	ft_is_sorting(t_list *array)
@@ -197,6 +213,46 @@ void	ft_basic_sort(t_list **array)
 	}
 }
 
+int	ft_find_median(t_list *array)
+{
+	t_list	*tmp;
+	int		size_list;
+	int		i;
+
+	i = 0;
+	tmp = array;
+	size_list = ft_list_size(array);
+	while (i < (size_list / 2))
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	if (size_list % 2 != 0)
+		return (*tmp->value);
+	else
+		return ((*tmp->value + *tmp->next->value) / 2);
+}
+
+void ft_sort_three_elements(t_list **array)
+{
+	int	*one;
+	int *two;
+	int	*last;
+
+	one = (*array)->value;
+	two = (*array)->next->value;
+	last = (*array)->next->next->value;
+	while (ft_is_sorting(*array) != 0)
+	{
+		if (two > one && two > last)
+			ft_rra_rotate(array);
+		else if (two < one && two < last)
+			ft_sa_swap(array);
+		else if (ft_nb_max(*array) == *one)
+			ft_ra_rotate(array);
+	}
+}
+
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -212,9 +268,8 @@ int	main(void)
 	my_list = NULL;
 	list_b = NULL;
 
-	
 	// {1,2, 3, 4, 5, 6, 7, 8}
-	int randomNumber[] = {11, 2, 1, 8, 7, 9, 5, 3, 6, 10};
+	int randomNumber[] = {1,2, 3}; //{11, 2, 1, 8, 7, 9, 5, 3, 6, 10};
 	int taille = sizeof(randomNumber) / sizeof(randomNumber[0]);
     // Initialiser le générateur de nombres aléatoires avec le temps actuel
     srand(time(NULL));
@@ -233,7 +288,10 @@ int	main(void)
         my_list = ft_lstappend(my_list, &randomNumber[i]);
     }
 
+
 	ft_basic_sort(&my_list);
+
+	ft_sort_three_elements(&my_list);
 
 	t_list *tmp = my_list;
 
@@ -242,6 +300,12 @@ int	main(void)
 		printf("%d\n", *tmp->value);
 		tmp = tmp->next;
 	}
+
+
+	// int med = ft_find_median(my_list);
+	// printf("median - %d\n", med);
+
+
 	// printf("**************************\n");
 	// ft_ra_rotate(&my_list);
 	// ft_sa_swap(&my_list);
