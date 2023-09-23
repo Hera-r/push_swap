@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/23 22:23:49 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:29:42 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,12 +244,22 @@ void ft_sort_three_elements(t_list **array)
 	last = (*array)->next->next->value;
 	while (ft_is_sorting(*array) != 0)
 	{
-		if (two > one && two > last)
+		if (ft_nb_min(*array) == *one && ft_nb_max(*array) == *two)
+		{
 			ft_rra_rotate(array);
-		else if (two < one && two < last)
 			ft_sa_swap(array);
-		else if (ft_nb_max(*array) == *one)
+		}
+		else if (ft_nb_max(*array) > *one && ft_nb_min(*array) == *last)
+			ft_rra_rotate(array);
+		else if (ft_nb_max(*array) == *one && ft_nb_min(*array) == *two)
 			ft_ra_rotate(array);
+		else if (*two < *one && *two < *last)
+			ft_sa_swap(array);
+		else if (ft_nb_max(*array) == *one && ft_nb_min(*array) == *last)
+		{
+			ft_ra_rotate(array);
+			ft_sa_swap(array);
+		}
 	}
 }
 
@@ -288,9 +298,6 @@ int	main(void)
         my_list = ft_lstappend(my_list, &randomNumber[i]);
     }
 
-
-	ft_basic_sort(&my_list);
-
 	ft_sort_three_elements(&my_list);
 
 	t_list *tmp = my_list;
@@ -300,7 +307,10 @@ int	main(void)
 		printf("%d\n", *tmp->value);
 		tmp = tmp->next;
 	}
-
+	if (ft_is_sorting(my_list) == 0)
+		printf("OK\n");
+	else
+		printf("error\n");
 
 	// int med = ft_find_median(my_list);
 	// printf("median - %d\n", med);
