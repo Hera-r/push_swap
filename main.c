@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/23 23:29:42 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/24 23:03:26 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,22 +178,27 @@ t_list	*ft_lstappend(t_list *array, int *value)
 	return (array);
 }
 
-// t_list	*sort_list_in_ascending_order(t_list *array)
-// {
-// 	t_list	*list_asc;
-// 	t_list	*tmp;
+// mettre les 3 fonctions du dessous dans une fonction "sort_and_get_median(list, n)"
+t_list	*sort_and_extract_partial_list(t_list *array, int n)
+{
+	t_list	*list_asc;
+	t_list	*tmp;
+	int		i;
 
-// 	tmp = array;
-// 	while (tmp!= NULL)
-// 	{
-// 		list_asc = ft_lstappend(list_asc, *tmp->value);
-// 		tmp = tmp->next;
-// 	}
-
-// }
+	i = 0;
+	tmp = array;
+	if (n == 0)
+		n = ft_list_size(array);
+	while (tmp!= NULL)
+	{
+		list_asc = ft_lstappend(list_asc, *tmp->value);
+		tmp = tmp->next;
+	}
+	return (list_asc);
+}
 
 // {1, 2, 11, 8, 7, 9, 5, 3, 6, 10}
-void	ft_basic_sort(t_list **array)
+void	sort_list_in_ascending_order(t_list **array)
 {
 	t_list	*lstmp;
 	int		*tmp;
@@ -231,6 +236,20 @@ int	ft_find_median(t_list *array)
 		return (*tmp->value);
 	else
 		return ((*tmp->value + *tmp->next->value) / 2);
+}
+
+int	ft_check_below_median(t_list *array, int median)
+{
+	t_list	*tmp;
+
+	tmp = array;
+	while (tmp != NULL)
+	{
+		if (*tmp->value > median)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 void ft_sort_three_elements(t_list **array)
@@ -298,6 +317,7 @@ int	main(void)
         my_list = ft_lstappend(my_list, &randomNumber[i]);
     }
 
+
 	ft_sort_three_elements(&my_list);
 
 	t_list *tmp = my_list;
@@ -356,32 +376,16 @@ int	main(void)
 	return (0);
 }
 
+
+// TO DO
 /*
+ - faire une fonction pop_front
+*/
 
-maka taille liste ohatra 10, dia aveo divisena en deux lasa 5
-jerena ny nombre min ohatra hoe 0
-dia aveo jerena ny index any hoe supérieur ou inférieur an'ilay moitié taille liste
-
-raha inférieur dia mampiasa "ra" jusqu'à ce que le min soit dans la première
-raha supérieur dia "rra" no ampesaina
- position de la liste, dia aveo rehefa hita push ao anatin'ny liste b
-dia aveo mamerina process jusqu'à ce que le (n) de la pile A == 1 
-
+/*
 
 ra : Le premier élément devient le dernier
 rra: Le dernier élément devient le premier.
-*/
-
-
-/*
-- Manao fonction iray mizara ny liste ho roa
-
-- Manao fonction izay anaovana trie (listra A, listra B)
-	- manao fonction mijery hoe efa trier ve sa tsia ny liste roa
-		- mijery hoe raha faha-roa ve ilay nombre min
-			*raha izay dia manao "sa" na "sb"
-			* dia aveo sady manao pb
-		- manao fonction mijery hoe inférieur sa supérieur
 
 */
 
