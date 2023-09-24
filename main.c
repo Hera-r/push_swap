@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/24 23:03:26 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/24 23:04:39 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,13 +300,10 @@ int	main(void)
 	// {1,2, 3, 4, 5, 6, 7, 8}
 	int randomNumber[] = {1,2, 3}; //{11, 2, 1, 8, 7, 9, 5, 3, 6, 10};
 	int taille = sizeof(randomNumber) / sizeof(randomNumber[0]);
-    // Initialiser le générateur de nombres aléatoires avec le temps actuel
     srand(time(NULL));
 
-    // Mélanger le tableau en utilisant l'algorithme de Fisher-Yates
     for (int i = taille - 1; i > 0; i--) {
         int j = rand() % (i + 1);
-        // Échanger randomNumber[i] et randomNumber[j]
         int temp = randomNumber[i];
         randomNumber[i] = randomNumber[j];
         randomNumber[j] = temp;
