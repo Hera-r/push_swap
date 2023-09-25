@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/24 23:04:39 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:23:14 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ t_list	*ft_lstappend(t_list *array, int *value)
 }
 
 // mettre les 3 fonctions du dessous dans une fonction "sort_and_get_median(list, n)"
-t_list	*sort_and_extract_partial_list(t_list *array, int n)
+t_list	*extract_partial_list(t_list *array, int n)
 {
 	t_list	*list_asc;
 	t_list	*tmp;
@@ -189,10 +189,11 @@ t_list	*sort_and_extract_partial_list(t_list *array, int n)
 	tmp = array;
 	if (n == 0)
 		n = ft_list_size(array);
-	while (tmp!= NULL)
+	while (i < n)
 	{
 		list_asc = ft_lstappend(list_asc, *tmp->value);
 		tmp = tmp->next;
+		i++;
 	}
 	return (list_asc);
 }
