@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/09/25 20:23:14 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:01:45 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ typedef struct s_list
 	int			*value;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_partial
+{
+	int			median;
+	t_list		*listpa;
+}				t_partial;
 
 int	ft_list_size(t_list *array)
 {
@@ -130,6 +136,19 @@ void	ft_pop_last(t_list **array)
 	last->next = NULL;
 }
 
+void	ft_pop_front(t_list **array)
+{
+	t_list	*tmp;
+
+	if ((*array)->next == NULL)
+	{
+		*array = NULL;
+		return ;
+	}
+	tmp = (*array)->next;
+	*array = tmp;
+}
+
 void	ft_rra_rotate(t_list **array)
 {
 	t_list *tmp;
@@ -187,11 +206,13 @@ t_list	*extract_partial_list(t_list *array, int n)
 
 	i = 0;
 	tmp = array;
+	list_asc = NULL;
 	if (n == 0)
 		n = ft_list_size(array);
 	while (i < n)
 	{
-		list_asc = ft_lstappend(list_asc, *tmp->value);
+		printf("-> %d\n", *tmp->value);
+		list_asc = ft_lstappend(list_asc, tmp->value);
 		tmp = tmp->next;
 		i++;
 	}
@@ -227,16 +248,33 @@ int	ft_find_median(t_list *array)
 
 	i = 0;
 	tmp = array;
-	size_list = ft_list_size(array);
+	size_list = ft_list_size(array) - 1;
 	while (i < (size_list / 2))
 	{
 		tmp = tmp->next;
 		i++;
 	}
-	if (size_list % 2 != 0)
+	if ((size_list + 1) % 2 != 0)
+	{
 		return (*tmp->value);
+	}
 	else
 		return ((*tmp->value + *tmp->next->value) / 2);
+}
+
+t_partial	sort_and_get_median(t_list *array, int n)
+{
+	t_list		*tmp;
+	t_partial	data;
+	int			median;
+
+	tmp = NULL;
+	tmp = extract_partial_list(array, n);
+	data.listpa = tmp;
+	sort_list_in_ascending_order(&tmp);
+	median = ft_find_median(tmp);
+	data.median = median;
+	return (data);
 }
 
 int	ft_check_below_median(t_list *array, int median)
@@ -283,96 +321,132 @@ void ft_sort_three_elements(t_list **array)
 	}
 }
 
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-int	main(void)
+void	ft_push_swap(t_list **array, t_list *arrb)
 {
-	t_list *my_list;
-	t_list *list_b;
+	t_list *tmp;
+	t_list *list_nb;
+	int		size;
+	int		nb;
 
-	srand(time(NULL));
-	int	size = 0;
-	int	min;
-	my_list = NULL;
-	list_b = NULL;
-
-	// {1,2, 3, 4, 5, 6, 7, 8}
-	int randomNumber[] = {1,2, 3}; //{11, 2, 1, 8, 7, 9, 5, 3, 6, 10};
-	int taille = sizeof(randomNumber) / sizeof(randomNumber[0]);
-    srand(time(NULL));
-
-    for (int i = taille - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int temp = randomNumber[i];
-        randomNumber[i] = randomNumber[j];
-        randomNumber[j] = temp;
-    }
-
-    for (int i = 0; i < taille; i++) {
-		printf("app - %d\n", randomNumber[i]);
-        my_list = ft_lstappend(my_list, &randomNumber[i]);
-    }
-
-
-	ft_sort_three_elements(&my_list);
-
-	t_list *tmp = my_list;
-
-	while (tmp != NULL)
+	size = ft_list_size(*array);
+	tmp = *array;
+	while (ft_is_sorting(*array) != 0 && ft_list_size(*array) == size)
 	{
-		printf("%d\n", *tmp->value);
-		tmp = tmp->next;
+		nb = 0;
+		int n = 0;
+		t_partial record = sort_and_get_median(*array, n);
+		if (ft_list_size(record.listpa) == 2 && ft_is_sorting(record.listpa) != 0)
+			ft_sa_swap(*array);
+		else
+		{
+			while (ft_check_below_median(record.listpa, record.median) != 0)
+			{
+				if (*tmp->value < record.median)
+				{
+					ft_pb_push(array, arrb);
+					nb++;
+				}
+				else
+					ft_ra_rotate(array);
+				tmp = tmp->next;
+			}
+		}
+		list_nb = ft_lstappend(list_nb, &nb);
+		if (ft_list_size(*array) <= 3)
+			ft_sort_three_elements(array);
 	}
-	if (ft_is_sorting(my_list) == 0)
-		printf("OK\n");
-	else
-		printf("error\n");
-
-	// int med = ft_find_median(my_list);
-	// printf("median - %d\n", med);
-
-
-	// printf("**************************\n");
-	// ft_ra_rotate(&my_list);
-	// ft_sa_swap(&my_list);
-	// ft_pb_push(&my_list, &list_b);
-	// ft_pb_push(&my_list, &list_b);
-	// ft_pb_push(&my_list, &list_b);
-	// ft_pb_push(&my_list, &list_b);
-	// ft_pb_push(&my_list, &list_b);
-
-
-    // for (int i = 0; i < taille/2; i++) {
-    //     ft_pb_push(&my_list, &list_b);
-    // }
-
-	// t_list *tmp = my_list;
-
-	// while (tmp != NULL)
-	// {
-	// 	printf("----=> %d\n", *tmp->value);
-	// 	tmp = tmp->next;
-	// }
-	// printf("**************************\n");
-	// ft_rra_rotate(&my_list);
-	// min = ft_nb_min(my_list);
-	// printf("Nb-Min: %d\n", min);
-
-	// while (list_b != NULL)
-	// {
-	// 	printf("+++++=> %d\n", *list_b->value);
-	// 	list_b = list_b->next;
-	// }
-	// return (0);
-	// while (my_list != NULL)
-	// {
-	// 	printf("----=> %d\n", *my_list->value);
-	// 	my_list = my_list->next;
-	// }
-	return (0);
 }
+
+// #include <time.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <time.h>
+// int	main(void)
+// {
+// 	t_list *my_list;
+// 	t_list *list_b;
+// 	t_list	*list_nb;
+
+// 	srand(time(NULL));
+// 	int	size = 0;
+// 	int	min;
+// 	my_list = NULL;
+// 	list_b = NULL;
+// 	list_nb = NULL;
+
+// 	// {1,2, 3, 4, 5, 6, 7, 8}
+// 	int randomNumber[] = {11, 2, 1, 8, 7, 9, 5, 3, 6, 10};
+// 	int taille = sizeof(randomNumber) / sizeof(randomNumber[0]);
+//     srand(time(NULL));
+
+//     // for (int i = taille - 1; i > 0; i--) {
+//     //     int j = rand() % (i + 1);
+//     //     int temp = randomNumber[i];
+//     //     randomNumber[i] = randomNumber[j];
+//     //     randomNumber[j] = temp;
+//     // }
+
+//     for (int i = 0; i < taille; i++) {
+// 		// printf("app - %d\n", randomNumber[i]);
+//         my_list = ft_lstappend(my_list, &randomNumber[i]);
+//     }
+
+// 	// ft_sort_three_elements(&my_list);
+
+// 	t_list *tmp = my_list;
+
+// 	while (tmp != NULL)
+// 	{
+// 		printf("%d\n", *tmp->value);
+// 		tmp = tmp->next;
+// 	}
+
+
+
+// 	// int med = ft_find_median(my_list);
+// 	// printf("median - %d\n", med);
+
+
+// 	// printf("**************************\n");
+// 	// ft_ra_rotate(&my_list);
+// 	// ft_sa_swap(&my_list);
+// 	// ft_pb_push(&my_list, &list_b);
+// 	// ft_pb_push(&my_list, &list_b);
+// 	// ft_pb_push(&my_list, &list_b);
+// 	// ft_pb_push(&my_list, &list_b);
+// 	// ft_pb_push(&my_list, &list_b);
+
+
+//     // for (int i = 0; i < taille/2; i++) {
+//     //     ft_pb_push(&my_list, &list_b);
+//     // }
+
+// 	// t_list *tmp = my_list;
+
+// 	// while (tmp != NULL)
+// 	// {
+// 	// 	printf("----=> %d\n", *tmp->value);
+// 	// 	tmp = tmp->next;
+// 	// }
+// 	// printf("**************************\n");
+// 	// ft_rra_rotate(&my_list);
+// 	// min = ft_nb_min(my_list);
+// 	// printf("Nb-Min: %d\n", min);
+
+// 	// while (list_b != NULL)
+// 	// {
+// 	// 	printf("+++++=> %d\n", *list_b->value);
+// 	// 	list_b = list_b->next;
+// 	// }
+// 	// return (0);
+// 	// while (my_list != NULL)
+// 	// {
+// 	// 	printf("----=> %d\n", *my_list->value);
+// 	// 	my_list = my_list->next;
+// 	// }
+// 	return (0);
+// }
+
 
 
 // TO DO
@@ -386,4 +460,5 @@ ra : Le premier élément devient le dernier
 rra: Le dernier élément devient le premier.
 
 */
+
 
