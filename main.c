@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/07 23:09:46 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/08 00:37:53 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void display(t_lst *h_b)
 	}
 }
 
-void	ft_pb_push(t_lst **h_a, t_lst **h_b)
+void	ft_pb_push(t_lst **h_a, t_lst **h_b, char *str)
 {
 	t_lst	*tmp_a;
 	t_lst	*tmp_b;
@@ -126,7 +126,6 @@ void	ft_pb_push(t_lst **h_a, t_lst **h_b)
 		tmp_b->next = NULL;
 		*h_b = tmp_b;
 		*h_a = tmp_a;
-		// printf("pb\n");
 	}
 	else
 	{
@@ -135,6 +134,7 @@ void	ft_pb_push(t_lst **h_a, t_lst **h_b)
 		*h_b = tmp_c;
 		*h_a = tmp_a;
 	}
+	printf("%s\n", str);
 }
 
 void	ft_nb_push(int nb, t_lst **head_nb)
@@ -155,13 +155,14 @@ void	ft_nb_push(int nb, t_lst **head_nb)
 	}
 }
 
-void	ft_sa_swap(t_lst **h_a)
+void	ft_sa_swap(t_lst **h_a, char *str)
 {
 	int	tmp;
 
 	tmp = (*h_a)->next->value;
 	(*h_a)->next->value = (*h_a)->value;
 	(*h_a)->value = tmp;
+	printf("%s\n",str);
 }
 
 void	ft_pop_last(t_lst **h_a)
@@ -194,7 +195,7 @@ void	ft_pop_front(t_lst **h_a)
 	*h_a = tmp;
 }
 
-void	ft_rra_rotate(t_lst **h_a)
+void	ft_rra_rotate(t_lst **h_a, char *str)
 {
 	t_lst *tmp;
 
@@ -206,9 +207,10 @@ void	ft_rra_rotate(t_lst **h_a)
 	ft_pop_last(h_a);
 	tmp->next = *h_a;
 	*h_a = tmp;
+	printf("%s\n",str);
 }
 
-void	ft_ra_rotate(t_lst **h_a)
+void	ft_ra_rotate(t_lst **h_a, char *str)
 {
 	t_lst	*tmp;
 	t_lst	*first;
@@ -222,6 +224,7 @@ void	ft_ra_rotate(t_lst **h_a)
 	tmp->next = *h_a;
 	tmp->next->next = NULL;
 	*h_a = first;
+	printf("%s\n",str);
 }
 
 t_lst	*ft_lstappend(t_lst *h_a, int value)
@@ -392,19 +395,19 @@ void ft_sort_three_elements(t_lst **h_a)
 	{
 		if (ft_nb_min(*h_a) == one && ft_nb_max(*h_a) == two)
 		{
-			ft_rra_rotate(h_a);
-			ft_sa_swap(h_a);
+			ft_rra_rotate(h_a, "rra");
+			ft_sa_swap(h_a, "sa");
 		}
 		else if (ft_nb_max(*h_a) > one && ft_nb_min(*h_a) == last)
-			ft_rra_rotate(h_a);
+			ft_rra_rotate(h_a, "rra");
 		else if (ft_nb_max(*h_a) == one && ft_nb_min(*h_a) == two)
-			ft_ra_rotate(h_a);
+			ft_ra_rotate(h_a, "ra");
 		else if (two < one && two < last)
-			ft_sa_swap(h_a);
+			ft_sa_swap(h_a, "sa");
 		else if (ft_nb_max(*h_a) == one && ft_nb_min(*h_a) == last)
 		{
-			ft_ra_rotate(h_a);
-			ft_sa_swap(h_a);
+			ft_ra_rotate(h_a, "ra");
+			ft_sa_swap(h_a, "sa");
 		}
 	}
 }
@@ -424,7 +427,7 @@ int	ft_sort_three_or_swap(t_lst **h_a, int *ison)
 	}
 	else if (lstsize(*h_a) == 2 && is_sorted(*h_a) != 0)
 	{
-		ft_sa_swap(h_a);
+		ft_sa_swap(h_a, "sa");
 		on = 2;
 		*ison = 1;
 	}
@@ -464,9 +467,9 @@ int	ft_max_to_last(t_lst **h_a)
 			tmp = tmp->next;
 		while (tmp->next != NULL)
 		{
-			ft_rra_rotate(h_a);
+			ft_rra_rotate(h_a, "rra");
 			if (h_a && (*h_a)->next != NULL && (*h_a)->value > (*h_a)->next->value)
-				ft_sa_swap(h_a);
+				ft_sa_swap(h_a, "sa");
 			n++;
 		}
 	}
@@ -485,11 +488,11 @@ int	send_to_h_a(t_lst **h_b, t_lst **h_a, t_lst **h_nb)
 		if ((*h_nb)->value == 2)
 		{
 			if (h_b && (*h_b)->value < (*h_b)->next->value)
-				ft_sa_swap(h_b);
+				ft_sa_swap(h_b, "sb");
 		}
 		while (i < (*h_nb)->value)
 		{
-			ft_pb_push(h_b, h_a);
+			ft_pb_push(h_b, h_a, "pa");
 			i++;
 		}
 	isexec = 1;
@@ -523,11 +526,11 @@ void	partition(t_lst **h_a, t_lst **h_b, t_lst **nb, int n)
 	{
 		if (tmp && tmp->value < rec.median)
 		{
-			ft_pb_push(h_a, h_b);
+			ft_pb_push(h_a, h_b, "pb");
 			rec.nb++;
 		}
 		else if (tmp->value >= rec.median)
-			ft_ra_rotate(h_a);
+			ft_ra_rotate(h_a, "ra");
 		tmp = *h_a;
 		rec.size_sub--;
 	}
@@ -551,8 +554,6 @@ void	ft_push_swap(t_lst **h_a, t_lst **h_b, t_lst **h_nb, int *ison)
 // ***Decouper la liste tant qu'il est superieur a 3 apres trier le N elements restant *****
 	while (lstsize(*h_a) > 3)
 	{
-		// printf("********* HERE before partition *********\n");
-		// display(*h_a);
 		partition(h_a, h_b, h_nb, rec.n);
 	}
 	ft_sort_three_or_swap(h_a, ison);
@@ -629,7 +630,7 @@ int	main(void)
 // ***************RANDOM ELEMENTS**********************************************
     srand(time(NULL));
 
-    const int taille = 2; // taille de la liste
+    const int taille = 100; // taille de la liste
     int randomNumber[taille];
 
     // Remplir le tableau avec des nombres aléatoires uniques de 0 à 100
@@ -639,7 +640,7 @@ int	main(void)
 
         do {
             estDejaPresent = 0;
-            nombreAleatoire = rand() % 6;  // Génère un nombre aléatoire entre 0 et 100
+            nombreAleatoire = rand() % 1001 - 500;  // Génère un nombre aléatoire entre 0 et 100
 
             for (int j = 0; j < i; ++j) {
                 if (randomNumber[j] == nombreAleatoire) {
@@ -651,12 +652,12 @@ int	main(void)
 
         randomNumber[i] = nombreAleatoire;
     }
-// **********************************************************************************
+// // **********************************************************************************
     for (int i = 0; i < taille; i++) {
         my_list = ft_lstappend(my_list, randomNumber[i]);
-		printf("%d\n", randomNumber[i]);
+		// printf("%d\n", randomNumber[i]);
     }
-	// printf("*******************\n");
+// 	// printf("*******************\n");
 
 
 
@@ -687,12 +688,10 @@ int	main(void)
 	// my_list = ft_lstappend(my_list, 15);
 	// my_list = ft_lstappend(my_list, 19);
 	// my_list = ft_lstappend(my_list, 656);
-	// my_list = ft_lstappend(my_list, 15);
 	// my_list = ft_lstappend(my_list, 105);
 	// my_list = ft_lstappend(my_list, 500);
 	// my_list = ft_lstappend(my_list, 449);
 	// my_list = ft_lstappend(my_list, 593);
-
 
 
 
@@ -710,19 +709,19 @@ int	main(void)
 
 	// sort_list_in_ascending_order(&my_list);
 
-	printf("*******************\n");
+	// printf("*******************\n");
 
-	t_lst *tmp = my_list;
+	// t_lst *tmp = my_list;
 
-	while (tmp != NULL)
-	{
-		printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
+	// while (tmp != NULL)
+	// {
+	// 	printf("%d\n", tmp->value);
+	// 	tmp = tmp->next;
+	// }
 
-	int sortd = is_sorted(my_list);
-	if (sortd == 0)
-		printf("OK\n");
+	// int sortd = is_sorted(my_list);
+	// if (sortd == 0)
+	// 	printf("OK\n");
 	// printf("*******************\n");
 	// t_lst *tmp_b = h_b;
 	// while (tmp_b != NULL)
