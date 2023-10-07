@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/07 22:50:46 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:09:46 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,9 +352,9 @@ int	ft_find_median(t_lst *h_a)
 
 t_part	sort_get_median(t_lst *h_a, int n)
 {
-	t_lst		*tmp;
+	t_lst	*tmp;
 	t_part	data;
-	int			median;
+	int		median;
 
 	tmp = extract_partial_list(h_a, n);
 	data.size_sub = lstsize(tmp);
@@ -480,13 +480,7 @@ int	send_to_h_a(t_lst **h_b, t_lst **h_a, t_lst **h_nb)
 
 	i = 0;
 	isexec = 0;
-	// printf("**************\n");
-	// printf("size lst -> %d\n", lstsize(*h_a));
-	// printf("is max -> %d\n", is_max_last(h_a));
-	// printf("is sorted %d\n", is_sorted(*h_a));
-	// printf("**************\n");
-
-	if (is_max_last(h_a) == 0 && is_sorted(*h_a) == 0) //lstsize(*h_a) > 2 && 
+	if (is_max_last(h_a) == 0 && is_sorted(*h_a) == 0)
  	{
 		if ((*h_nb)->value == 2)
 		{
