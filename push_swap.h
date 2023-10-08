@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 13:21:07 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 18:45:38 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/08 21:21:37 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_pop_last(t_lst **h_a);
 void	ft_pop_front(t_lst **h_a);
 void	ft_rra_rotate(t_lst **h_a, char *str);
 void	ft_ra_rotate(t_lst **h_a, char *str);
-void	ft_pb_push(t_lst **h_a, t_lst **h_b, char *str);
+void	ft_pb_push(t_lst **h_a, t_lst **h_b, const char *str);
 void	ft_nb_push(int nb, t_lst **head_nb);
 void	sort_list_in_ascending_order(t_lst **h_a);
 void	partition(t_lst **h_a, t_lst **h_b, t_lst **nb, int n);

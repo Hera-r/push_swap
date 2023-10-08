@@ -6,13 +6,13 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:47:25 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 19:41:58 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:02:05 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pb_push(t_lst **h_a, t_lst **h_b, char *str)
+void	ft_pb_push(t_lst **h_a, t_lst **h_b, const char *str)
 {
 	t_lst	*tmp_a;
 	t_lst	*tmp_b;

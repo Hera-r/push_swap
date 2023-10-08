@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 17:38:22 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/08 21:22:55 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	ft_push_swap(t_lst **h_a, t_lst **h_b, t_lst **h_nb, int *ison)
 			
 	// 	// ***********************************************************************************************
 
-
 	// 	// *********** rentre dans cette condition si l'un des deux condition son rempli ************
 		if (rec.send_ha_v > 2 || rec.unsorted_v > 2)
 		{
@@ -74,7 +73,6 @@ void	ft_push_swap(t_lst **h_a, t_lst **h_b, t_lst **h_nb, int *ison)
 		rec.unsorted_v = get_index_unsorted_value(*h_a);
 	}
 }
-
 
 #include <time.h>
 #include <stdio.h>
@@ -119,7 +117,7 @@ int	main(void)
 
         do {
             estDejaPresent = 0;
-            nombreAleatoire = rand() % 1001 - 500;  // Génère un nombre aléatoire entre 0 et 100
+            nombreAleatoire = rand() % 501;  // Génère un nombre aléatoire entre 0 et 100
 
             for (int j = 0; j < i; ++j) {
                 if (randomNumber[j] == nombreAleatoire) {
@@ -137,7 +135,6 @@ int	main(void)
 		// printf("%d\n", randomNumber[i]);
     }
 // 	// printf("*******************\n");
-
 
 
 
@@ -172,11 +169,7 @@ int	main(void)
 	// my_list = ft_lstappend(my_list, 449);
 	// my_list = ft_lstappend(my_list, 593);
 
-
-
-
 	// partition(&my_list, &h_b, &list_nb, 0);
-
 
 	// h_b = ft_lstappend(h_b, 1);
 	// h_b = ft_lstappend(h_b, 2);
