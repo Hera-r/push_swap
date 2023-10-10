@@ -6,114 +6,92 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:38:09 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 23:02:11 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:05:08 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-typedef struct s_listr
+void	ft_nb_push(int nb, t_lst **head_nb)
 {
-	char			*str;
-	struct s_listr	*next;
-}					t_lstr;
+	t_lst	*elmt;
 
-
-
-static void display(t_lstr *head)
-{
-	printf("*******************\n");
-	t_lstr *tmp =  NULL;
-		tmp = head;
-	while (tmp != NULL)
-	{
-		printf("- %s\n", tmp->str);
-		tmp = tmp->next;
-	}
-}
-
-
-t_lstr	*strappend(t_lstr *h_a, char *str)
-{
-	t_lstr	*element;
-	t_lstr	*tmp;
-
-	tmp = h_a;
-	element = malloc(sizeof(*element));
-	if (element == NULL)
-		return (NULL);
-	element->str = str;
-	element->next = NULL;
-	if (h_a == NULL)
-		h_a = element;
+	elmt = malloc(sizeof(*elmt));
+	if (elmt == NULL)
+		return ;
+	elmt->value = nb;
+	elmt->next = NULL;
+	if (head_nb == NULL)
+		*head_nb = elmt;
 	else
 	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = element;
+		elmt->next = *head_nb;
+		*head_nb = elmt;
 	}
-	tmp = NULL;
-	return (h_a);
 }
 
-void	delete_occurrence(t_lstr *head)
+void	ft_pop_last(t_lst **h_a)
 {
-	t_lstr *tmp;
-	t_lstr *new;
-	t_lstr *prev;
+	t_lst	*tmp;
+	t_lst	*last;
 
-	tmp = head;
-	while (tmp != NULL && tmp->next != NULL)
+	tmp = *h_a;
+	last = NULL;
+	if (h_a == NULL)
+		return ;
+	while (tmp->next != NULL)
 	{
-		if ((tmp->str == "ra" && tmp->next->str == "rra") ||
-			(tmp->str == "rra" && tmp->next->str == "ra"))
-		{
-			new = tmp->next->next;
-			free(tmp->next);
-			tmp->next = new;
-		}
-		else 
-		{
-			if (prev == NULL)
-				head = tmp;
-			else
-				prev->next = tmp;
-			prev = tmp;
-			tmp = tmp->next;
-		}
-    }
-    if (prev != NULL) {
-        prev->next = NULL;
-    }
+		last = tmp;
+		tmp = tmp->next;
+	}
+	last->next = NULL;
 }
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-int main(void)
+void	ft_pop_front(t_lst **h_a)
 {
-	t_lstr *principal;
-	t_lstr *disp;
+	t_lst	*tmp;
 
-	principal = NULL;
-	disp = NULL;
+	if ((*h_a)->next == NULL)
+	{
+		*h_a = NULL;
+		return ;
+	}
+	tmp = (*h_a)->next;
+	*h_a = tmp;
+}
 
+int	ft_is_max(int firstn, t_lst *a)
+{
+	t_lst	*tmp;
 
-	principal = strappend(principal, "pb");
-	principal = strappend(principal, "ra");
-	principal = strappend(principal, "rra");
-	principal = strappend(principal, "pa");
-	principal = strappend(principal, "rra");
-	principal = strappend(principal, "ra");
-	principal = strappend(principal, "rra");
+	tmp = a;
+	while (tmp != NULL)
+	{
+		if (tmp->value > firstn)
+			return (FAIL);
+		tmp = tmp->next;
+	}
+	return (SUCCESS);
+}
 
+t_lst	*extract_partial_list(t_lst *h_a, int n)
+{
+	t_lst	*list_asc;
+	t_lst	*tmp;
+	int		i;
 
-	display(principal);
-
-	delete_occurrence(principal);
-
-	display(principal);
-	
-
-	return (0);
+	i = 0;
+	tmp = h_a;
+	list_asc = NULL;
+	if (tmp == NULL)
+		return (list_asc);
+	if (n == 0)
+		n = lstsize(h_a);
+	while (i < n)
+	{
+		list_asc = ft_lstappend(list_asc, tmp->value);
+		tmp = tmp->next;
+		i++;
+	}
+	return (list_asc);
 }

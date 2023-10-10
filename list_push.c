@@ -6,13 +6,13 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:47:25 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 23:02:05 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:05:10 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pb_push(t_lst **h_a, t_lst **h_b, const char *str)
+void	ft_pb_push(t_lst **h_a, t_lst **h_b, const char *str, t_node *head)
 {
 	t_lst	*tmp_a;
 	t_lst	*tmp_b;
@@ -34,24 +34,28 @@ void	ft_pb_push(t_lst **h_a, t_lst **h_b, const char *str)
 		*h_b = tmp_c;
 		*h_a = tmp_a;
 	}
-	printf("%s\n", str);
+	*head = ft_append_move(*head, str);
 }
 
-void	ft_nb_push(int nb, t_lst **head_nb)
+t_node	ft_append_move(t_node head, const char *move)
 {
-	t_lst	*elmt;
+	t_move	*new_elem;
+	t_move	*temp;
 
-	elmt = malloc(sizeof(*elmt));
-	if (elmt == NULL)
-		return ;
-	elmt->value = nb;
-	elmt->next = NULL;
-	if (head_nb == NULL)
-		*head_nb = elmt;
+	new_elem = malloc(sizeof(t_move));
+	if (!new_elem)
+		return (NULL);
+	new_elem->move = ft_strdup(move);
+	new_elem->next = NULL;
+	if (head == NULL)
+		return (new_elem);
 	else
 	{
-		elmt->next = *head_nb;
-		*head_nb = elmt;
+		temp = head;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new_elem;
+		return (head);
 	}
 }
 
@@ -76,26 +80,4 @@ t_lst	*ft_lstappend(t_lst *h_a, int value)
 	}
 	tmp = NULL;
 	return (h_a);
-}
-
-t_lst	*extract_partial_list(t_lst *h_a, int n)
-{
-	t_lst	*list_asc;
-	t_lst	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = h_a;
-	list_asc = NULL;
-	if (tmp == NULL)
-		return (list_asc);
-	if (n == 0)
-		n = lstsize(h_a);
-	while (i < n)
-	{
-		list_asc = ft_lstappend(list_asc, tmp->value);
-		tmp = tmp->next;
-		i++;
-	}
-	return (list_asc);
 }

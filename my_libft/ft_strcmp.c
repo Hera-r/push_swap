@@ -6,15 +6,15 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:53:27 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 17:57:17 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:09:28 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+int	my_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i])

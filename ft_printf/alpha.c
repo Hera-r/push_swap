@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:46:03 by hrandria          #+#    #+#             */
-/*   Updated: 2023/02/26 22:27:10 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:11:51 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_putstr(char *s)
 	while (s[i])
 	{
 		write(1, &s[i], 1);
-	i++;
+		i++;
 	}
 	return (i);
 }

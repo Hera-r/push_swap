@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 18:31:58 by hrandria          #+#    #+#             */
-/*   Updated: 2023/02/26 22:30:02 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:09:52 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ char	*ft_strdup(const char *s)
 	while (s[i])
 	{
 		new_space[i] = s[i];
-	i++;
+		i++;
 	}
 	new_space[i] = '\0';
 	return (new_space);
 }
-

@@ -6,13 +6,13 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:51:11 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 17:13:06 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:04:55 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int find_last_unsorted_value(t_lst *head)
+int	find_last_unsorted_value(t_lst *head)
 {
 	t_lst	*tmp;
 	int		last_unsorted;
@@ -21,12 +21,13 @@ int find_last_unsorted_value(t_lst *head)
 	last_unsorted = INT_MIN;
 	while (tmp != NULL && tmp->next != NULL)
 	{
-		if (tmp->value > tmp->next->value) {
+		if (tmp->value > tmp->next->value)
+		{
 			last_unsorted = tmp->next->value;
 		}
 		tmp = tmp->next;
 	}
-	return last_unsorted;
+	return (last_unsorted);
 }
 
 int	get_index_unsorted_value(t_lst *head)

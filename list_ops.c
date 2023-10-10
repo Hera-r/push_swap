@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:26:23 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 17:13:09 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:05:12 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	lstsize(t_lst *h_a)
 {
-	t_lst *tmp;
-	int	size;
+	t_lst	*tmp;
+	int		size;
 
 	tmp = h_a;
 	size = 0;
@@ -29,8 +29,8 @@ int	lstsize(t_lst *h_a)
 
 int	ft_nb_min(t_lst *h_a)
 {
-	t_lst *tmp;
-	int	min;
+	t_lst	*tmp;
+	int		min;
 
 	tmp = h_a;
 	min = tmp->value;
@@ -45,8 +45,8 @@ int	ft_nb_min(t_lst *h_a)
 
 int	ft_nb_max(t_lst *h_a)
 {
-	t_lst *tmp;
-	int	max;
+	t_lst	*tmp;
+	int		max;
 
 	tmp = h_a;
 	max = tmp->value;
@@ -69,20 +69,6 @@ int	is_sorted(t_lst *h_a)
 	while (tmp->next != NULL)
 	{
 		if (tmp->value > tmp->next->value)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	ft_check_below_median(t_lst *h_a, int median)
-{
-	t_lst	*tmp;
-
-	tmp = h_a;
-	while (tmp != NULL)
-	{
-		if (tmp->value > median)
 			return (1);
 		tmp = tmp->next;
 	}

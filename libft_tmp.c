@@ -6,48 +6,38 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:11:45 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/08 16:23:56 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:05:16 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_space(char c)
+int	cmp(const char *str1, const char *str2)
 {
-	if ((c >= 9 && c <= 13) || c == ' ')
-		return (1);
-	return (0);
-}
-
-t_fatoi	ft_atoi(char *str)
-{
-	t_fatoi fnumber;
-	int		i;
-	int		sign;
+	int	i;
 
 	i = 0;
-	sign = 1;
-	fnumber.n = 0;
-	while (is_space(str[i]))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (str1[i] && str2[i])
 	{
-		if (str[i] == '-')
-		{
-			sign *= -1;
-		}
+		if (str1[i] != str2[i])
+			return (FAIL);
 		i++;
 	}
-	if (ft_isdigit(str[i]) == 0)
+	if (str1[i])
+		return (FAIL);
+	return (SUCCESS);
+}
+
+int	ft_check_below_median(t_lst *h_a, int median)
+{
+	t_lst	*tmp;
+
+	tmp = h_a;
+	while (tmp != NULL)
 	{
-		fnumber.err = 'X';
-		return (fnumber);
+		if (tmp->value > median)
+			return (1);
+		tmp = tmp->next;
 	}
-	while (ft_isdigit(str[i]))
-	{
-		fnumber.n = fnumber.n * 10 + (str[i] - '0');
-		i++;
-	}
-	fnumber.n = fnumber.n * sign;
-	return (fnumber);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:46:28 by hrandria          #+#    #+#             */
-/*   Updated: 2023/02/26 22:27:22 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:11:34 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_hexadecimal(unsigned int nb, int *result, char c)
 		}
 		else
 		{
-		(*result)++;
+			(*result)++;
 			write(1, &hexa[nb], 1);
 		}
 	}

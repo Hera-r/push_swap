@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:07:09 by hrandria          #+#    #+#             */
-/*   Updated: 2023/02/26 22:30:13 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:10:57 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i])
-	i++;
+		i++;
 	return (i);
 }
