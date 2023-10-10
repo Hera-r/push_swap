@@ -6,82 +6,76 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:05:05 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:28:10 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-void	ft_push_swap(t_lst **h_a, t_lst **h_b, t_lst **h_nb, t_node *move_chained)
+static void	init_rec(t_part *rec)
 {
-	t_part	rec;
-	int		result;
+	(*rec).n = 0;
+	(*rec).max_v = 0;
+	(*rec).unsorted_v = 0;
+	(*rec).send_ha_v = 0;
+	(*rec).nb_three = 0;
+	(*rec).result = 0;
+}
 
-	rec.n = 0;
-	rec.max_v = 0;
-	rec.unsorted_v = 0;
-	rec.send_ha_v = 0;
-	rec.nb_three = 0;
+static void	first_part_ps(t_lst **a, t_lst **b, t_lst **h_nb, t_node *move)
+{
+	int	result;
 
-
-// ***Decouper la liste tant qu'il est superieur a 3 apres trier le N elements restant *****
-	while (lstsize(*h_a) > 3)
+	result = 0;
+	while (lstsize(*a) > 3)
 	{
-		// printf("********* HERE before partition *********\n");
-		// display(*h_a);
-		result = partition(h_a, h_b, rec.n, move_chained);
+		result = partition(a, b, 0, move);
 		if (result != 0)
 			ft_nb_push(result, h_nb);
 	}
-	ft_sort_three_or_swap(h_a, move_chained);
-// ***************************************************
+	ft_sort_three_or_swap(a, move);
+}
 
-	while (is_sorted(*h_a) != 0 || lstsize(*h_nb) != 0)
+static void	last_part_ps(t_lst **h_a, t_part *rec, t_node *head)
+{
+	ft_max_to_last(h_a, head);
+	(*rec).send_ha_v = 0;
+	(*rec).unsorted_v = get_index_unsorted_value(*h_a);
+}
+
+static void	sub_partition(t_lst **a, t_lst **b, t_part *rec, t_node *move)
+{
+	if ((*rec).send_ha_v > 2)
+		(*rec).result = partition(a, b, (*rec).send_ha_v, move);
+	else
+		(*rec).result = partition(a, b, (*rec).unsorted_v, move);
+}
+
+void	ft_push_swap(t_lst **a, t_lst **b, t_lst **h_nb, t_node *move)
+{
+	t_part	rec;
+
+	init_rec(&rec);
+	first_part_ps(a, b, h_nb, move);
+	while (is_sorted(*a) != 0 || lstsize(*h_nb) != 0)
 	{
 		if (rec.unsorted_v < 3)
 		{
-			rec.send_ha_v = send_to_h_a(h_b, h_a, h_nb, move_chained);
-			if (is_sorted(*h_a) == 0 && ft_is_inverse_sorted(h_b, lstsize(*h_b)) == 1)
+			rec.send_ha_v = send_to_h_a(b, a, h_nb, move);
+			if (is_sorted(*a) == 0 && ft_is_inverse_sorted(b, lstsize(*b)) == 1)
 			{
-				final_merge(h_a, h_b, move_chained);
-				ft_pop_front(h_nb);
-				// printf("HERE stack A\n");
-				// display(*h_a);
+				final_merge(a, b, h_nb, move);
 				break ;
 			}
 		}
-			
-	// 	// ***********************************************************************************************
-
-
-	// 	// *********** rentre dans cette condition si l'un des deux condition son rempli ************
 		if (rec.send_ha_v > 2 || rec.unsorted_v > 2)
 		{
-			if (rec.send_ha_v > 2)
-			{
-				rec.n = rec.send_ha_v;
-				result = partition(h_a, h_b, rec.n, move_chained);
-				if (result != 0)
-					ft_nb_push(result, h_nb);
-			}
-			else
-			{
-				result = partition(h_a, h_b, rec.unsorted_v, move_chained);
-				if (result != 0)
-					ft_nb_push(result, h_nb);
-			}
+			sub_partition(a, b, &rec, move);
+			if (rec.result != 0)
+				ft_nb_push(rec.result, h_nb);
 		}
-
-		// ******************************************************************************************
-		// ** on verifier si Nombre-Max est a la dernire position, si c'est non on le remet **********
-		ft_max_to_last(h_a, move_chained);
-		// ********************************************************************************************
-		// ********* Initialiser les deux valeurs a zero ********************************************
-		rec.send_ha_v = 0;
-		rec.unsorted_v = 0;
-		// *****************************************************************************************
-		rec.unsorted_v = get_index_unsorted_value(*h_a);
+		last_part_ps(a, &rec, move);
 	}
 }
 
@@ -94,12 +88,12 @@ int	main(void)
 	t_lst	*my_list;
 	t_lst	*h_b;
 	t_lst	*list_nb;
-	t_node	move_chained;
+	t_node	head;
 
 	my_list = NULL;
 	h_b = NULL;
 	list_nb = NULL;
-	move_chained = NULL;
+	head = NULL;
 	// srand(time(NULL));
 	// int	size = 0;
 	// int	min;
@@ -121,7 +115,7 @@ int	main(void)
 // ***************RANDOM ELEMENTS**********************************************
     srand(time(NULL));
 
-    const int taille = 500; // taille de la liste
+    const int taille = 10; // taille de la liste
     int randomNumber[taille];
 
     // Remplir le tableau avec des nombres aléatoires uniques de 0 à 100
@@ -148,54 +142,19 @@ int	main(void)
         my_list = ft_lstappend(my_list, randomNumber[i]);
 		//printf("%d ", randomNumber[i]);
     }
-	// printf("*******************\n");
+// ****************************************************************************************
 
 
-	// h_b = ft_lstappend(h_b, 1);
-	// h_b = ft_lstappend(h_b, 2);
-	// printf("*******************\n");
-	// ft_nb_push(2, &list_nb);
-	// send_to_h_a(&h_b, &my_list, &list_nb);
 
-	ft_push_swap(&my_list, &h_b, &list_nb, &move_chained);
-	ft_check_move_chained(move_chained);
-	// printf("HERE stack A\n");
-	// display(my_list);
-	// printf("HERE stack B\n");
-	// display(h_b);
-	ft_display_move(move_chained);
-	// printf("Number of move = %d\n", ft_size_move(move_chained));
-	// printf("AFTER CHECK MOVE\n");
-	// printf("Number of move = %d\n", ft_size_move(move_chained));
-	// sort_list_in_ascending_order(&my_list);
 
-	// printf("*******************\n");
-
-	// t_lst *tmp = my_list;
-
-	// while (tmp != NULL)
-	// {
-	// 	printf("%d\n", tmp->value);
-	// 	tmp = tmp->next;
-	// }
-
-	// int sortd = is_sorted(my_list);
-	// if (sortd == 0)
-	// 	printf("OK\n");
-	// printf("*******************\n");
-	// t_lst *tmp_b = h_b;
-	// while (tmp_b != NULL)
-	// {
-	// 	printf("- %d\n", tmp_b->value);
-	// 	tmp_b = tmp_b->next;
-	// }
-	// printf("*******************\n");
-	// t_lst *tmp_b = h_b;
-	// while (tmp_b != NULL)
-	// {
-	// 	printf("- %d\n", tmp_b->value);
-	// 	tmp_b = tmp_b->next;
-	// }
+// ************************* EXEC ******************************
+	ft_push_swap(&my_list, &h_b, &list_nb, &head);
+	ft_check_move_chained(head);
+	ft_display_move(head);
+	free_lst(list_nb);
+	free_lst(my_list);
+	free_t_nod(head);
+// *************************************************************
 
 	return (0);
  }

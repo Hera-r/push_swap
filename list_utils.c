@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:38:09 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:05:08 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:20:38 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_nb_push(int nb, t_lst **head_nb)
 		return ;
 	elmt->value = nb;
 	elmt->next = NULL;
-	if (head_nb == NULL)
+	if (*head_nb == NULL)
 		*head_nb = elmt;
 	else
 	{

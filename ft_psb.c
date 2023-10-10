@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:04:41 by mle-bras          #+#    #+#             */
-/*   Updated: 2023/10/10 21:05:18 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 22:48:26 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ft_psb(t_lst **h_b, t_lst **h_a, t_lst **h_nb, t_node *head)
 		else
 			quick_sort_hb(h_b, h_a, head, &rec);
 	}
+	free_lst(rec.listpa);
 	if (h_nb != NULL)
 		isexec = lstsize(*h_b);
 	ft_pop_front(h_nb);

@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 13:21:07 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:08:49 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:20:23 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_partial
 	int			send_ha_v;
 	int			nb_value;
 	int			nb_three;
+	int			result;
 	t_lst		*listpa;
 }				t_part;
 
@@ -77,6 +78,8 @@ void		ft_pb_push(t_lst **h_a, t_lst **h_b, \
 void		ft_sa_swap(t_lst **h_a, const char *str, t_node *head);
 void		ft_sort_three_elements(t_lst **h_a, t_node *head);
 void		ft_nb_push(int nb, t_lst **head_nb);
+void		free_lst(t_lst *head);
+void		free_t_nod(t_node head);
 void		ft_pop_last(t_lst **h_a);
 void		ft_pop_front(t_lst **h_a);
 void		ft_check_move_chained(t_node chained);
@@ -87,7 +90,7 @@ void		sort_list_in_ascending_order(t_lst **h_a);
 void		ft_inverse_sort(t_lst **h_a, t_node *head);
 void		quick_sort_hb(t_lst **h_b, t_lst **h_a, \
 			t_node *move, t_part *rec);
-void		final_merge(t_lst **a, t_lst **b, t_node *head);
+void		final_merge(t_lst **a, t_lst **b, t_lst **h_nb, t_node *head);
 
 t_lst		*ft_lstappend(t_lst *h_a, int value);
 t_lst		*extract_partial_list(t_lst *h_a, int n);

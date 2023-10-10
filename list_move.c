@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:56:53 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:07:10 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:20:33 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,10 @@ t_node	del_mv(t_node chained, const char *del, const char *next, int *n)
 		cmp(tmp->next->move, del) == SUCCESS)
 		{
 			new_next = tmp->next->next;
-			free(tmp->next->move);
-			free(tmp->next);
 			if (new_next->next != NULL)
 				tmp->next = new_next->next;
 			else
 				tmp->next = NULL;
-			free(new_next->move);
-			free(new_next);
 		}
 		else if (tmp->next)
 			tmp = tmp->next;
@@ -52,15 +48,12 @@ static t_node	check_swap(t_node mv, int *n, const char *s1, const char *s2)
 		if (cmp(tmp->move, s1) == SUCCESS && (tmp->next != NULL && \
 		cmp(tmp->next->move, s2) == SUCCESS))
 		{
-			free(tmp->move);
 			tmp->move = ft_strdup("ss");
 			tmp2 = tmp->next;
 			if (tmp2->next != NULL)
 				tmp->next = tmp2->next;
 			else
 				tmp->next = NULL;
-			free(tmp2->move);
-			free(tmp2);
 		}
 		tmp = tmp->next;
 	}
@@ -74,6 +67,7 @@ static void	ft_second_check(t_node chained)
 	int		del;
 
 	tmp = chained;
+	del = 0;
 	while (tmp != NULL && tmp->next != NULL)
 	{
 		del = 0;
@@ -103,6 +97,7 @@ void	ft_check_move_chained(t_node chained)
 	int		del;
 
 	tmp = chained;
+	del = 0;
 	while (tmp != NULL && tmp->next != NULL)
 	{
 		del = 0;
