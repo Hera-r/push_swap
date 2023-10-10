@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:58:58 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:05:02 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:15:04 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_display_move(t_node head)
 	tmp = head;
 	while (tmp != NULL)
 	{
-		printf("%s\n", tmp->move);
+		ft_printf("%s\n", tmp->move);
 		tmp = tmp->next;
 	}
 }
