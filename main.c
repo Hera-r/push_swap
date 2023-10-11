@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 23:28:10 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:17:48 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	main(void)
 // ***************RANDOM ELEMENTS**********************************************
     srand(time(NULL));
 
-    const int taille = 10; // taille de la liste
+    const int taille = 100; // taille de la liste
     int randomNumber[taille];
 
     // Remplir le tableau avec des nombres aléatoires uniques de 0 à 100
