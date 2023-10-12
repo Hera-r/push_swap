@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 13:21:07 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 23:20:23 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 22:57:46 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ int			ft_is_inverse_sorted(t_lst **a, int nb);
 int			send_to_h_a(t_lst **b, t_lst **a, t_lst **h_nb, t_node *head);
 int			partition(t_lst **h_a, t_lst **h_b, int n, t_node *head);
 int			ft_check_below_median(t_lst *h_a, int median);
+int			ft_lstappend(t_lst **h_a, int value);
 
 void		ft_pb_push(t_lst **h_a, t_lst **h_b, \
 			const char *str, t_node *head);
 void		ft_sa_swap(t_lst **h_a, const char *str, t_node *head);
 void		ft_sort_three_elements(t_lst **h_a, t_node *head);
 void		ft_nb_push(int nb, t_lst **head_nb);
-void		free_lst(t_lst *head);
+void		free_lst(t_lst **head);
 void		free_t_nod(t_node head);
 void		ft_pop_last(t_lst **h_a);
 void		ft_pop_front(t_lst **h_a);
@@ -91,11 +92,12 @@ void		ft_inverse_sort(t_lst **h_a, t_node *head);
 void		quick_sort_hb(t_lst **h_b, t_lst **h_a, \
 			t_node *move, t_part *rec);
 void		final_merge(t_lst **a, t_lst **b, t_lst **h_nb, t_node *head);
+void		ft_check_move_chained(t_node head);
 
-t_lst		*ft_lstappend(t_lst *h_a, int value);
-t_lst		*extract_partial_list(t_lst *h_a, int n);
+t_lst		*extract_partial_list(t_lst **h_a, int n);
 t_part		sort_get_median(t_lst *h_a, int n);
 
-t_node		del_mv(t_node chained, const char *del, const char *next, int *n);
+t_node		del_mv(t_node head, const char *del, const char *next, int *n);
+t_node		check_swap(t_node mv, int *n, const char *s1, const char *s2);
 t_node		ft_append_move(t_node head, const char *move);
 #endif

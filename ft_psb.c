@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 19:04:41 by mle-bras          #+#    #+#             */
-/*   Updated: 2023/10/10 22:48:26 by hrandria         ###   ########.fr       */
+/*   Created: 2023/10/12 22:15:44 by hrandria          #+#    #+#             */
+/*   Updated: 2023/10/12 22:58:43 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ void	quick_sort_hb(t_lst **h_b, t_lst **h_a, t_node *move, t_part *rec)
 	t_lst	*tmp;
 
 	tmp = *h_b;
-	if (tmp && tmp->value > (*rec).median)
+	if (tmp && tmp->value >= (*rec).median)
+	{
 		ft_pb_push(h_b, h_a, "pa", move);
-	else if (tmp->value <= (*rec).median)
+		if ((*h_a)->value > (*h_a)->next->value)
+			ft_sa_swap(h_a, "sa", move);
+	}
+	else if (tmp->value < (*rec).median)
 		ft_ra_rotate(h_b, "rb", move);
 	tmp = *h_b;
 	(*rec).size_sub--;
@@ -48,7 +52,6 @@ int	ft_psb(t_lst **h_b, t_lst **h_a, t_lst **h_nb, t_node *head)
 		else
 			quick_sort_hb(h_b, h_a, head, &rec);
 	}
-	free_lst(rec.listpa);
 	if (h_nb != NULL)
 		isexec = lstsize(*h_b);
 	ft_pop_front(h_nb);

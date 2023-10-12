@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:11:45 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 23:20:30 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 22:59:28 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	cmp(const char *str1, const char *str2)
 {
 	int	i;
 
+	if (str1 == NULL || str2 == NULL)
+		return (FAIL);
 	i = 0;
 	while (str1[i] && str2[i])
 	{
@@ -42,12 +44,12 @@ int	ft_check_below_median(t_lst *h_a, int median)
 	return (0);
 }
 
-void	free_lst(t_lst *head)
+void	free_lst(t_lst **head)
 {
 	t_lst *tmp;
 	t_lst *next;
 
-	tmp = head;
+	tmp = *head;
 	while (tmp != NULL)
 	{
 		next = tmp->next;

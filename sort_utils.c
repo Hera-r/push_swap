@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:51:11 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 23:20:27 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 22:57:14 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,17 @@ t_part	sort_get_median(t_lst *h_a, int n)
 	t_part	data;
 	int		median;
 
-	tmp = extract_partial_list(h_a, n);
+	tmp = NULL;
+	data.listpa = NULL;
+	tmp = extract_partial_list(&h_a, n);
+	if (tmp == FAIL)
+		return (data);
 	data.size_sub = lstsize(tmp);
 	data.listpa = tmp;
 	sort_list_in_ascending_order(&tmp);
 	median = ft_find_median(tmp);
 	data.median = median;
+	free_lst(&tmp);
+	tmp = NULL;
 	return (data);
 }

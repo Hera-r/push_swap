@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:04:48 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 23:23:50 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:11:51 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	partition(t_lst **h_a, t_lst **h_b, int n, t_node *head)
 		tmp = *h_a;
 		rec.size_sub--;
 	}
-	free_lst(rec.listpa);
 	return (rec.nb);
 }
 
@@ -112,4 +111,6 @@ void	final_merge(t_lst **a, t_lst **b, t_lst **h_nb, t_node *head)
 		i++;
 	}
 	ft_pop_front(h_nb);
+	free_lst(h_nb);
+	*h_nb = NULL;
 }

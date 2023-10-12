@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:38:09 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 23:20:38 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 22:36:51 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	ft_pop_last(t_lst **h_a)
 		tmp = tmp->next;
 	}
 	last->next = NULL;
+	free(tmp);
+	if (tmp == *h_a)
+		*h_a = NULL;
 }
 
 void	ft_pop_front(t_lst **h_a)
@@ -53,10 +56,13 @@ void	ft_pop_front(t_lst **h_a)
 
 	if ((*h_a)->next == NULL)
 	{
+		free(*h_a);
 		*h_a = NULL;
 		return ;
 	}
 	tmp = (*h_a)->next;
+	free(*h_a);
+	*h_a = NULL;
 	*h_a = tmp;
 }
 
@@ -74,22 +80,25 @@ int	ft_is_max(int firstn, t_lst *a)
 	return (SUCCESS);
 }
 
-t_lst	*extract_partial_list(t_lst *h_a, int n)
+t_lst	*extract_partial_list(t_lst **h_a, int n)
 {
 	t_lst	*list_asc;
 	t_lst	*tmp;
 	int		i;
+	int		result;
 
 	i = 0;
-	tmp = h_a;
+	tmp = *h_a;
 	list_asc = NULL;
 	if (tmp == NULL)
-		return (list_asc);
+		return (*h_a);
 	if (n == 0)
-		n = lstsize(h_a);
+		n = lstsize(*h_a);
 	while (i < n)
 	{
-		list_asc = ft_lstappend(list_asc, tmp->value);
+		result = ft_lstappend(&list_asc, tmp->value);
+		if (result == FAIL)
+			return (FAIL);
 		tmp = tmp->next;
 		i++;
 	}

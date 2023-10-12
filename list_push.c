@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:47:25 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 22:43:34 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 22:44:34 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,24 @@ t_node	ft_append_move(t_node head, const char *move)
 	}
 }
 
-t_lst	*ft_lstappend(t_lst *h_a, int value)
+int	ft_lstappend(t_lst **h_a, int value)
 {
 	t_lst	*element;
 	t_lst	*tmp;
 
-	tmp = h_a;
+	tmp = *h_a;
 	element = malloc(sizeof(*element));
 	if (element == NULL)
-		return (NULL);
+		return (FAIL);
 	element->value = value;
 	element->next = NULL;
-	if (h_a == NULL)
-		h_a = element;
+	if (*h_a == NULL)
+		*h_a = element;
 	else
 	{
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp->next = element;
 	}
-	tmp = NULL;
-	return (h_a);
+	return (SUCCESS);
 }

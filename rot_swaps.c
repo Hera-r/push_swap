@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 16:43:00 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:04:58 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 22:44:45 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	ft_rra_rotate(t_lst **h_a, const char *str, t_node *head)
 	t_lst	*tmp;
 
 	tmp = *h_a;
-	if (tmp == NULL)
+	if (tmp == NULL || tmp->next == NULL)
 		return ;
-	while (tmp && tmp->next != NULL)
+	while (tmp->next->next != NULL)
 		tmp = tmp->next;
-	ft_pop_last(h_a);
-	tmp->next = *h_a;
-	*h_a = tmp;
+	tmp->next->next = *h_a;
+	*h_a = tmp->next;
+	tmp->next = NULL;
 	*head = ft_append_move(*head, str);
 }
 

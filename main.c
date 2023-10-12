@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/11 14:17:48 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:34:37 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ void	ft_push_swap(t_lst **a, t_lst **b, t_lst **h_nb, t_node *move)
 		{
 			rec.send_ha_v = send_to_h_a(b, a, h_nb, move);
 			if (is_sorted(*a) == 0 && ft_is_inverse_sorted(b, lstsize(*b)) == 1)
-			{
 				final_merge(a, b, h_nb, move);
-				break ;
-			}
 		}
 		if (rec.send_ha_v > 2 || rec.unsorted_v > 2)
 		{
@@ -115,7 +112,7 @@ int	main(void)
 // ***************RANDOM ELEMENTS**********************************************
     srand(time(NULL));
 
-    const int taille = 100; // taille de la liste
+    const int taille = 3; // taille de la liste
     int randomNumber[taille];
 
     // Remplir le tableau avec des nombres aléatoires uniques de 0 à 100
@@ -139,11 +136,10 @@ int	main(void)
     }
 // // **********************************************************************************
     for (int i = 0; i < taille; i++) {
-        my_list = ft_lstappend(my_list, randomNumber[i]);
+        ft_lstappend(&my_list, randomNumber[i]);
 		//printf("%d ", randomNumber[i]);
     }
 // ****************************************************************************************
-
 
 
 
@@ -151,8 +147,8 @@ int	main(void)
 	ft_push_swap(&my_list, &h_b, &list_nb, &head);
 	ft_check_move_chained(head);
 	ft_display_move(head);
-	free_lst(list_nb);
-	free_lst(my_list);
+	free_lst(&list_nb);
+	free_lst(&my_list);
 	free_t_nod(head);
 // *************************************************************
 
@@ -162,10 +158,12 @@ int	main(void)
 
 
 
+/*
+	int s = is_sorted(my_list);
+	if (s == 0)
+		printf("OK !!\n");
 
-
-
-
+*/
 
 
 
