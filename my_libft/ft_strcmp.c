@@ -6,13 +6,13 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 17:53:27 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:15:47 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 00:11:05 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	my_strcmp(char *s1, char *s2)
+int	xstrcmp(char *s1, char *s2)
 {
 	int	i;
 

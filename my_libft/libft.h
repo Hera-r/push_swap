@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:36:16 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/10 21:15:41 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 00:11:01 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 size_t	ft_strlen(const char *s);
 int		ft_isdigit(int c);
-int		my_strcmp(char *s1, char *s2);
+int		xstrcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s);
 
 #endif
