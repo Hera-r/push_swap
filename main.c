@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 18:15:41 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:25:24 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char *argv[])
 	if (argc > 1)
 	{
 		if (is_good_args(argc, argv, &my_list) == 1)
-			return (0);
+			return (free_lst(&my_list), 0);
 		if (compare_lst(&my_list) == 1)
 			return (free_lst(&my_list), 0);
 		ft_push_swap(&my_list, &h_b, &list_nb, &head);
