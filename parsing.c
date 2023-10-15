@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:48:59 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 18:10:29 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:34:16 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	check_more_args(int argc, char *argv[])
 	{
 		if (argv[i][0] != '+' && argv[i][0] != '-' && \
 			isdigit(argv[i][0]) == 0)
-			return (printf("Error\n"), 1);
+			return (ft_printf("Error\n"), 1);
 		while (argv[i][j])
 		{
 			if (isdigit(argv[i][j]) == 0)
-				return (printf("Error\n"), 1);
+				return (ft_printf("Error\n"), 1);
 			j++;
 		}
 	i++;
@@ -48,7 +48,7 @@ int	init_value(int argc, t_lst **head, char *argv[])
 	while (argv[i])
 	{
 		if (xatoi(argv[i]) <= INT_MIN || xatoi(argv[i]) >= INT_MAX)
-			return (printf("Error\n"), 1);
+			return (ft_printf("Error\n"), 1);
 		ft_lstappend(head, xatoi(argv[i]));
 		i++;
 	}

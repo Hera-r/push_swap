@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:39:50 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 17:52:09 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:34:18 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	compare_elem_tab(char **tab)
 		while (tab[j])
 		{
 			if (xstrcmp(tab[i], tab[j]) == 0)
-				return (printf("Error\n"), 1);
+				return (ft_printf("Error\n"), 1);
 			j++;
 		}
 	i++;
@@ -62,7 +62,7 @@ int	compare_lst(t_lst **head)
 		while (after != NULL)
 		{
 			if (tmp->value == after->value)
-				return (printf("Error\n"), 1);
+				return (ft_printf("Error\n"), 1);
 			after = after->next;
 		}
 	tmp = tmp->next;
