@@ -1,9 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/15 17:33:40 by hrandria          #+#    #+#             */
+/*   Updated: 2023/10/15 17:47:44 by hrandria         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "push_swap.h"
 
-
-int	len_dup(char *str)
+static int	len_dup(char *str)
 {
 	int	i;
 
@@ -33,6 +42,35 @@ char	*strdupx(char *str)
 	return (str_buffer);
 }
 
+static int	is_space(char c)
+{
+	if ((c >= 9 && c <= 13) || (c == ' '))
+		return (1);
+	return (0);
+}
 
+int	xatoi(const char *nptr)
+{
+	int	i;
+	int	sign;
+	int	n;
 
+	i = 0;
+	sign = 1;
+	n = 0;
+	while (is_space(nptr[i]))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (isdigit(nptr[i]))
+	{
+		n = n * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (n * sign);
+}
 

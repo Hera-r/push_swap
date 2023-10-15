@@ -1,6 +1,6 @@
 CC=cc
 NAME=push_swap
-SRC_FILES=main.c libft_tmp.c list_ops.c rot_swaps.c list_push.c sort_utils.c sort_three.c main_ops.c list_utils.c list_move.c move_utils.c ft_psb.c
+SRC_FILES=main.c libft_tmp.c list_ops.c rot_swaps.c list_push.c sort_utils.c sort_three.c main_ops.c list_utils.c list_move.c move_utils.c ft_psb.c parsing.c parsing_utils.c tmp.c
 OBJ=$(SRC_FILES:.c=.o)
 
 all: $(NAME)
