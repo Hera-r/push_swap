@@ -6,21 +6,11 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:20:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 18:34:13 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:09:57 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	init_rec(t_part *rec)
-{
-	(*rec).n = 0;
-	(*rec).max_v = 0;
-	(*rec).unsorted_v = 0;
-	(*rec).send_ha_v = 0;
-	(*rec).nb_three = 0;
-	(*rec).result = 0;
-}
 
 static void	first_part_ps(t_lst **a, t_lst **b, t_lst **h_nb, t_node *move)
 {
@@ -91,6 +81,8 @@ int	main(int argc, char *argv[])
 		if (is_good_args(argc, argv, &my_list) == 1)
 			return (free_lst(&my_list), 0);
 		if (compare_lst(&my_list) == 1)
+			return (free_lst(&my_list), 0);
+		if (is_sorted(my_list) == 0)
 			return (free_lst(&my_list), 0);
 		ft_push_swap(&my_list, &h_b, &list_nb, &head);
 		ft_check_move_chained(head);

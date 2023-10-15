@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 22:15:44 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/12 22:58:43 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:10:03 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ int	ft_psb(t_lst **h_b, t_lst **h_a, t_lst **h_nb, t_node *head)
 		isexec = lstsize(*h_b);
 	ft_pop_front(h_nb);
 	return (isexec);
+}
+
+void	init_rec(t_part *rec)
+{
+	(*rec).n = 0;
+	(*rec).max_v = 0;
+	(*rec).unsorted_v = 0;
+	(*rec).send_ha_v = 0;
+	(*rec).nb_three = 0;
+	(*rec).result = 0;
 }

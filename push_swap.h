@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 13:21:07 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 17:52:33 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:10:10 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void		quick_sort_hb(t_lst **h_b, t_lst **h_a, \
 void		final_merge(t_lst **a, t_lst **b, t_lst **h_nb, t_node *head);
 void		ft_check_move_chained(t_node head);
 void		free_tab(char **tab);
+void		init_rec(t_part *rec);
 
 char		*strdupx(char *str);
 char		**ft_split(char *str);

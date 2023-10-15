@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:39:50 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 18:34:18 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:05:28 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	compare_elem_tab(char **tab)
 				return (ft_printf("Error\n"), 1);
 			j++;
 		}
-	i++;
+		i++;
 	}
 	return (0);
 }
@@ -65,7 +65,7 @@ int	compare_lst(t_lst **head)
 				return (ft_printf("Error\n"), 1);
 			after = after->next;
 		}
-	tmp = tmp->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }
@@ -79,8 +79,8 @@ int	split_size(char *str)
 	count = 0;
 	while (str[i])
 	{
-		while(str[i] && str[i] == ' ')
-		i++;
+		while (str[i] && str[i] == ' ')
+			i++;
 		if (str[i] && str[i] != ' ')
 		{
 			while (str[i] && str[i] != ' ')

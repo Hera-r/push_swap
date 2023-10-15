@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:33:40 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 17:47:44 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:07:18 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	len_dup(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i] && str[i] != ' ')
-	i++;
+	while (str[i] && str[i] != ' ')
+		i++;
 	return (i);
 }
 
@@ -27,7 +27,7 @@ char	*strdupx(char *str)
 	char	*str_buffer;
 	int		size;
 	int		i;
-	
+
 	i = 0;
 	size = len_dup(str);
 	str_buffer = malloc((size + 1) * sizeof(char));
@@ -73,4 +73,3 @@ int	xatoi(const char *nptr)
 	}
 	return (n * sign);
 }
-

@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:11:45 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 17:49:01 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/15 23:04:26 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	cmp(const char *str1, const char *str2)
 
 void	free_lst(t_lst **head)
 {
-	t_lst *tmp;
-	t_lst *next;
+	t_lst	*tmp;
+	t_lst	*next;
 
 	tmp = *head;
 	while (tmp != NULL)
@@ -44,13 +44,14 @@ void	free_lst(t_lst **head)
 	}
 }
 
-void free_t_nod(t_node head) 
+void	free_t_nod(t_node head)
 {
 	t_node	tmp; 
 	t_node	next;
 
 	tmp = head;
-	while (tmp != NULL) {
+	while (tmp != NULL)
+	{
 		next = tmp->next;
 		free(tmp->move);
 		free(tmp);
@@ -58,7 +59,7 @@ void free_t_nod(t_node head)
 	}
 }
 
-void free_tab(char **tab)
+void	free_tab(char **tab)
 {
 	int	i;
 
@@ -74,32 +75,28 @@ void free_tab(char **tab)
 char	**ft_split(char *str)
 {
 	char	**tab;
-	int		size;
-	int		tmp;
-	int		i;
-	int		j;
+	t_part	r;
 
-	i = 0;
-	j = 0;
-	size = split_size(str);
-	tab = malloc((size + 1) * sizeof(char *));
+	r.i = 0;
+	r.ison = 0;
+	tab = malloc((split_size(str) + 1) * sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
-	while (str[i])
+	while (str[r.i])
 	{
-		while (str[i] && str[i] == ' ')
-			i++;
-		if (str[i] && str[i] != ' ')
+		while (str[r.i] && str[r.i] == ' ')
+			(r.i)++;
+		if (str[r.i] && str[r.i] != ' ')
 		{
-			tmp = i;
-			while (str[i] && str[i] != ' ')
-				i++;
-			tab[j] = strdupx(str + tmp);
-			if (!tab[j])
+			r.n = r.i;
+			while (str[r.i] && str[r.i] != ' ')
+				r.i++;
+			tab[r.ison] = strdupx(str + r.n);
+			if (!tab[r.ison])
 				return (free_tab(tab), NULL);
-			j++;
+			r.ison++;
 		}
 	}
-	tab[j] = 0;
+	tab[r.ison] = 0;
 	return (tab);
 }
