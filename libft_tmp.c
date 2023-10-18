@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:11:45 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 23:04:26 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:33:15 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_lst(t_lst **head)
 
 void	free_t_nod(t_node head)
 {
-	t_node	tmp; 
+	t_node	tmp;
 	t_node	next;
 
 	tmp = head;

@@ -6,7 +6,7 @@
 /*   By: hrandria <hrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:48:59 by hrandria          #+#    #+#             */
-/*   Updated: 2023/10/15 23:06:25 by hrandria         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:32:42 by hrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	one_argv(int argc, char *argv[], t_lst **head)
 	int		resutl;
 	int		duplicate;
 
+	tab = 0;
 	if (argc == 2)
 	{
 		tab = ft_split(argv[1]);
